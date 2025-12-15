@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.compose")
     id("kotlin-kapt")
     id("kotlin-parcelize")
 }
@@ -28,6 +27,10 @@ android {
         compose = true
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
+    }
+
     kotlin {
         jvmToolchain(17)
     }
@@ -45,12 +48,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     packaging {
@@ -91,13 +94,11 @@ android {
 
 dependencies {
 
-    implementation("com.google.android.material:material:1.12.0")
+    implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.test.espresso:espresso-contrib:3.6.1")
-    val kotlin_version = "2.1.20"
     implementation(kotlin("stdlib"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     //noinspection GradleDependency
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("androidx.constraintlayout:constraintlayout:2.2.1")
@@ -115,13 +116,12 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0") // Check for the latest version available
 
     // compose
-    implementation(platform("androidx.compose:compose-bom:2025.03.00"))
+    implementation(platform("androidx.compose:compose-bom:2024.06.00"))
 
     // Choose one of the following:
     // Material Design 3
     implementation("androidx.compose.material3:material3")
     // or Material Design 2
-    implementation("androidx.compose.material:material")
     // or skip Material Design and build directly on top of foundational components
     implementation("androidx.compose.foundation:foundation")
     // or only import the main APIs for the underlying toolkit systems,
@@ -130,7 +130,7 @@ dependencies {
 
     // Android Studio Preview support
     implementation("androidx.compose.ui:ui-tooling-preview")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2025.04.01"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.06.00"))
     debugImplementation("androidx.compose.ui:ui-tooling")
 
     // UI Tests
